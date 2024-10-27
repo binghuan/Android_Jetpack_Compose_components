@@ -12,15 +12,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.bh.androidx_material_samples.ui.AlertDialogSample
-import com.bh.androidx_material_samples.ui.BackdropScaffoldSample
-import com.bh.androidx_material_samples.ui.SimpleTopAppBar
+import com.bh.androidx_material_samples.ui.*
 import com.bh.androidx_material_samples.ui.theme.AndroidxmaterialsamplesTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +29,8 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavigationComponent(
-                        navController = navController, modifier = Modifier.padding(innerPadding)
+                        navController = navController,
+                        modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
@@ -41,43 +39,93 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HomeScreen(navController: NavHostController, modifier: Modifier = Modifier) {
+fun HomeScreen(
+    navController: NavHostController, modifier: Modifier = Modifier
+) {
     Column(modifier = modifier.padding(16.dp)) {
-        Button(onClick = { navController.navigate("alertDialog") }) {
-            Text(text = "AlertDialogSample")
-        }
-        Button(onClick = { navController.navigate("appBar") }) {
-            Text(text = "TopAppBarSimple")
-        }
-        Button(onClick = { navController.navigate("backdropScaffold") }) {
-            Text(text = "BackdropScaffoldSample")
+        val samples = listOf(
+            "AlertDialogSample" to "alertDialog",
+            "TopAppBarSample" to "appBar",
+            "BackdropScaffoldSample" to "backdropScaffold",
+            "BadgeSample" to "badge",
+            "BottomNavigationSample" to "bottomNavigation",
+            "BottomSheetScaffoldSample" to "bottomSheetScaffold",
+            "ButtonSample" to "button",
+            "CardSample" to "card",
+            "ChipSample" to "chip",
+            "ContentAlphaSample" to "contentAlpha",
+            "DrawerSample" to "drawer",
+            "ElevationSample" to "elevation",
+            "ExposedDropdownMenuSample" to "exposedDropdownMenu",
+            "FloatingActionButtonSample" to "fab",
+            "IconButtonSample" to "iconButton",
+            "ListSample" to "list",
+            "MenuSample" to "menu",
+            "ModalBottomSheetSample" to "modalBottomSheet",
+            "NavigationRailSample" to "navigationRail",
+            "ProgressIndicatorSample" to "progressIndicator",
+            "PullRefreshSample" to "pullRefresh",
+            "ScaffoldSample" to "scaffold",
+            "SelectionControlsSample" to "selectionControls",
+            "SliderSample" to "slider",
+            "SurfaceSample" to "surface",
+            "SwipeableSample" to "swipeable",
+            "TabSample" to "tab",
+            "TextFieldSample" to "textField",
+            "TextSample" to "text",
+            "ThemeSample" to "theme"
+        )
+
+        samples.forEach { (label, route) ->
+            Button(
+                onClick = { navController.navigate(route) },
+                modifier = Modifier.padding(vertical = 4.dp)
+            ) {
+                Text(text = label)
+            }
         }
     }
 }
 
 @Composable
-fun NavigationComponent(navController: NavHostController, modifier: Modifier = Modifier) {
+fun NavigationComponent(
+    navController: NavHostController, modifier: Modifier = Modifier
+) {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            HomeScreen(navController = navController, modifier = modifier)
+            HomeScreen(
+                navController = navController, modifier = modifier
+            )
         }
-        composable("alertDialog") {
-            AlertDialogSample()
-        }
-        composable("appBar") {
-            SimpleTopAppBar()
-        }
-        composable("backdropScaffold") {
-            BackdropScaffoldSample()
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    val navController = rememberNavController()
-    AndroidxmaterialsamplesTheme {
-        HomeScreen(navController = navController)
+        composable("alertDialog") { AlertDialogSample() }
+        composable("appBar") { SimpleTopAppBar() }
+        composable("backdropScaffold") { BackdropScaffoldSample() }
+        composable("badge") { BottomNavigationItemWithBadge() }
+        composable("bottomNavigation") { BottomNavigationSample() }
+        composable("bottomSheetScaffold") { BottomSheetScaffoldSample() }
+        composable("button") { ButtonSample() }
+        composable("card") { CardSample() }
+        composable("chip") { ChipSample() }
+        composable("contentAlpha") { ContentAlphaSample() }
+        composable("drawer") { ModalDrawerSample() }
+        composable("elevation") { AbsoluteElevationSample() }
+        composable("exposedDropdownMenu") { ExposedDropdownMenuSample() }
+        composable("fab") { SimpleFab() }
+        composable("iconButton") { IconButtonSample() }
+        composable("list") { ClickableListItems() }
+        composable("menu") { MenuSample() }
+        composable("modalBottomSheet") { ModalBottomSheetSample() }
+        composable("navigationRail") { NavigationRailSample() }
+        composable("progressIndicator") { LinearProgressIndicatorSample() }
+        composable("pullRefresh") { PullRefreshSample() }
+        composable("scaffold") { SimpleScaffoldWithTopBar() }
+        composable("selectionControls") { TriStateCheckboxSample() }
+        composable("slider") { SliderSample() }
+        composable("surface") { SurfaceSample() }
+        composable("swipeable") { SwipeableSample() }
+        composable("tab") { TextTabs() }
+        composable("textField") { SimpleTextFieldSample() }
+        composable("text") { TextWithLinks() }
+        composable("theme") { MaterialThemeSample() }
     }
 }

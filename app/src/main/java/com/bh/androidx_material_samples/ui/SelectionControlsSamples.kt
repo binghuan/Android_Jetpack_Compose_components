@@ -47,11 +47,10 @@ fun TriStateCheckboxSample() {
         val (state2, onStateChange2) = remember { mutableStateOf(true) }
 
         // TriStateCheckbox state reflects state of dependent checkboxes
-        val parentState =
-            remember(state, state2) {
-                if (state && state2) ToggleableState.On
-                else if (!state && !state2) ToggleableState.Off else ToggleableState.Indeterminate
-            }
+        val parentState = remember(state, state2) {
+            if (state && state2) ToggleableState.On
+            else if (!state && !state2) ToggleableState.Off else ToggleableState.Indeterminate
+        }
         // click on TriStateCheckbox can set state for dependent checkboxes
         val onParentClick = {
             val s = parentState != ToggleableState.On
@@ -80,11 +79,11 @@ fun FocusedCheckboxSample() {
 
     val focusRequester = FocusRequester()
     Box(Modifier.wrapContentSize(Alignment.TopStart)) {
-        Checkbox(
-            modifier = Modifier.wrapContentSize(Alignment.TopStart).focusRequester(focusRequester),
+        Checkbox(modifier = Modifier
+            .wrapContentSize(Alignment.TopStart)
+            .focusRequester(focusRequester),
             checked = true,
-            onCheckedChange = {}
-        )
+            onCheckedChange = {})
     }
 
     val localInputModeManager = LocalInputModeManager.current
@@ -99,19 +98,22 @@ fun FocusedCheckboxSample() {
 @Composable
 fun CheckboxSample() {
     val checkedState = remember { mutableStateOf(true) }
-    Checkbox(checked = checkedState.value, onCheckedChange = { checkedState.value = it })
+    Checkbox(checked = checkedState.value,
+        onCheckedChange = { checkedState.value = it })
 }
 
 
 @Composable
 fun SwitchSample() {
     val checkedState = remember { mutableStateOf(true) }
-    Switch(checked = checkedState.value, onCheckedChange = { checkedState.value = it })
+    Switch(checked = checkedState.value,
+        onCheckedChange = { checkedState.value = it })
 
     var pineappleOnPizza by remember { mutableStateOf(true) }
 
     Row(
-        Modifier.padding(16.dp)
+        Modifier
+            .padding(16.dp)
             .toggleable(
                 role = Role.Switch,
                 value = pineappleOnPizza,
@@ -140,12 +142,17 @@ fun RadioButtonSample() {
 @Composable
 fun RadioGroupSample() {
     val radioOptions = listOf("Calls", "Missed", "Friends")
-    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[0]) }
+    val (selectedOption, onOptionSelected) = remember {
+        mutableStateOf(
+            radioOptions[0]
+        )
+    }
     // Note that Modifier.selectableGroup() is essential to ensure correct accessibility behavior
     Column(Modifier.selectableGroup()) {
         radioOptions.forEach { text ->
             Row(
-                Modifier.fillMaxWidth()
+                Modifier
+                    .fillMaxWidth()
                     .height(56.dp)
                     .selectable(
                         selected = (text == selectedOption),
@@ -167,6 +174,18 @@ fun RadioGroupSample() {
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun TriStateCheckboxSamplePreview() {
+    TriStateCheckboxSample()
+}
+
+@Preview
+@Composable
+fun FocusedCheckboxSamplePreview() {
+    FocusedCheckboxSample()
 }
 
 @Preview

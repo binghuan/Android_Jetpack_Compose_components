@@ -17,22 +17,33 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun BottomNavigationItemWithBadge() {
     BottomNavigation {
-        BottomNavigationItem(icon = {
-            BadgedBox(badge = {
-                Badge {
-                    val badgeNumber = "8"
-                    Text(badgeNumber, modifier = Modifier.semantics {
-                        contentDescription = "$badgeNumber new notifications"
-                    })
+        BottomNavigationItem(
+            icon = {
+                BadgedBox(
+                    badge = {
+                        Badge {
+                            val badgeNumber = "8"
+                            Text(
+                                badgeNumber,
+                                modifier =
+                                Modifier.semantics {
+                                    contentDescription = "$badgeNumber new notifications"
+                                }
+                            )
+                        }
+                    }
+                ) {
+                    Icon(Icons.Filled.Favorite, contentDescription = "Favorite")
                 }
-            }) {
-                Icon(Icons.Filled.Favorite, contentDescription = "Favorite")
-            }
-        }, selected = false, onClick = {})
+            },
+            selected = false,
+            onClick = {}
+        )
     }
 }
 
-@Preview(showBackground = true)
+
+@Preview
 @Composable
 fun BottomNavigationItemWithBadgePreview() {
     BottomNavigationItemWithBadge()
