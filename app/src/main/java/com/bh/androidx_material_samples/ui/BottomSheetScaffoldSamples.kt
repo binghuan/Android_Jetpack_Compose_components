@@ -26,6 +26,7 @@ import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -73,7 +74,7 @@ fun BottomSheetScaffoldSample() {
         scaffoldState = scaffoldState,
         topBar = { TopAppBar { Text("Bottom sheet scaffold") } },
         floatingActionButton = {
-            var clickCount by remember { mutableStateOf(0) }
+            var clickCount by remember { mutableIntStateOf(0) }
             FloatingActionButton(onClick = {
                 // show snackbar as a suspend function
                 scope.launch {

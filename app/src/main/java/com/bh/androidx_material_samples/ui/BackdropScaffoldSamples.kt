@@ -19,7 +19,7 @@ import androidx.compose.material.rememberBackdropScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun BackdropScaffoldSample() {
     val scope = rememberCoroutineScope()
-    val selection = remember { mutableStateOf(1) }
+    val selection = remember { mutableIntStateOf(1) }
     val scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed)
     LaunchedEffect(scaffoldState) { scaffoldState.reveal() }
     BackdropScaffold(scaffoldState = scaffoldState, appBar = {
@@ -48,7 +48,7 @@ fun BackdropScaffoldSample() {
                 }
             }
         }, actions = {
-            var clickCount by remember { mutableStateOf(0) }
+            var clickCount by remember { mutableIntStateOf(0) }
             IconButton(onClick = {
                 // show snackbar as a suspend function
                 scope.launch {
@@ -71,7 +71,7 @@ fun BackdropScaffoldSample() {
             }
         }
     }, frontLayerContent = {
-        Text("Selection: ${selection.value}")
+        Text("Selection: ${selection.intValue}")
         LazyColumn {
             items(50) {
                 ListItem(text = { Text("Item $it") }, icon = {
