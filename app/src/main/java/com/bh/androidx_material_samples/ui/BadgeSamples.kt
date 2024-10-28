@@ -1,7 +1,7 @@
 package com.bh.androidx_material_samples.ui
 
-import androidx.compose.material.Badge
-import androidx.compose.material.BadgedBox
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -17,28 +17,18 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun BottomNavigationItemWithBadge() {
     BottomNavigation {
-        BottomNavigationItem(
-            icon = {
-                BadgedBox(
-                    badge = {
-                        Badge {
-                            val badgeNumber = "8"
-                            Text(
-                                badgeNumber,
-                                modifier =
-                                Modifier.semantics {
-                                    contentDescription = "$badgeNumber new notifications"
-                                }
-                            )
-                        }
-                    }
-                ) {
-                    Icon(Icons.Filled.Favorite, contentDescription = "Favorite")
+        BottomNavigationItem(icon = {
+            BadgedBox(badge = {
+                Badge {
+                    val badgeNumber = "8"
+                    Text(badgeNumber, modifier = Modifier.semantics {
+                        contentDescription = "$badgeNumber new notifications"
+                    })
                 }
-            },
-            selected = false,
-            onClick = {}
-        )
+            }) {
+                Icon(Icons.Filled.Favorite, contentDescription = "Favorite")
+            }
+        }, selected = false, onClick = {})
     }
 }
 
